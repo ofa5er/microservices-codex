@@ -7,7 +7,7 @@ Through the series we are going to build an e-commerce website following best pr
 
 ## References
 ### Tools
-- https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml
+- 
 ### Articles and Books
 - 
 

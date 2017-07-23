@@ -1,0 +1,162 @@
+"/*
+* @Author: Fakher Oueslati
+* @Date: 2017-07-23 12:03:01
+* @Last Modified by:   Fakher Oueslati
+* @Last Modified time: 2017-07-23 12:03:01
+*/
+"
+@startuml
+skinparam handwritten true
+skinparam monochrome true
+skinparam rectangle {
+  roundCorner 25
+}
+title Microservice codeX - General Architecture
+actor "Mobile User" as MU
+actor "Desktop User" as DU
+actor "Delivery Agent" as DA
+rectangle "API Gateway" {
+  node AG [
+    API Gateway
+    Service
+  ]
+}
+rectangle "User Account" as USR {
+  interface REST as US_REST
+  node US [
+  User Account
+  Service
+  ]
+  database US_DB [
+  User Account
+  ]
+  US_REST -- US
+  US -- US_DB
+}
+
+rectangle "Inventory" as ISR {
+  interface REST as IS_REST
+  node IS [
+  Inventory
+  Service
+  ]
+  database IS_DB [
+  Inventory
+  ]
+  IS_REST -- IS
+  IS -- IS_DB
+}
+rectangle Order as OSR {
+  interface REST as OS_REST
+  node OS [
+  Order
+  Service
+  ]
+  database OS_DB [
+  Order
+  ]
+  OS_REST -- OS
+  OS -- OS_DB
+}
+
+rectangle "Chart" as CSR {
+  interface REST as CS_REST
+  node CS [
+  Chart
+  Service
+  ]
+  database CS_DB [
+  Chart
+  ]
+  CS_REST -- CS
+  CS -- CS_DB
+}
+
+rectangle Ads as ASR {
+  interface REST as AS_REST
+  node AS [
+  Ads
+  Service
+  ]
+  database AS_DB [
+  Ads
+  ]
+  AS_REST -- AS
+  AS -- AS_DB
+}
+
+rectangle Delivery as DSR {
+  interface REST as DS_REST
+  node DS [
+  Delivery
+  Service
+  ]
+  database DS_DB [
+  Delivery
+  ]
+  DS_REST -- DS
+  DS -- DS_DB
+}
+
+rectangle "Idendity Provider" as IPSR {
+  interface REST as IPS_REST
+  node IPS [
+  Idendity
+  Service
+  ]
+  database IPS_DB [
+  Idendity
+  ]
+  IPS_REST -- IPS
+  IPS -- IPS_DB
+}
+
+rectangle "Web UI" as WUI_R {
+  node WUI [
+  Web Interface
+  Service
+  ]
+}
+
+rectangle "Cache" {
+  database Cache [
+  Redis
+  ]
+}
+
+rectangle Analytics as ANSR {
+  interface REST as ANS_REST
+  node ANS [
+  Analytics
+  Service
+  ]
+  database ANS_DB [
+  Analytics
+  ]
+  ANS_REST -- ANS
+  ANS -- ANS_DB
+}
+
+queue ABUS [
+  Analytics Event Bus
+]
+
+MU -- AG
+DA -- AG
+DU -- WUI
+AG -- US_REST
+AG -- IS_REST
+AG -- CS_REST
+AG -- DS_REST
+AG -- OS_REST
+AG -- AS_REST
+WUI -- AG
+AS -- ANS_REST
+US -d-> ABUS
+OS -d-> ABUS
+CS -d-> ABUS
+AS -d-- ABUS
+IS -d-> ABUS
+ABUS -d-> ANS
+
+@enduml

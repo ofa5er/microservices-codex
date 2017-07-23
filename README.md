@@ -9,9 +9,8 @@ Through the series we are going to build an e-commerce website following best pr
 
 ## General Architecture
 ![alt text](https://github.com/ofa5er/microservices-codex/blob/master/diagrams/general_architecture.png)
-## Tutorial 1
-TBD
-## Tutorial 2
+## Tutorial - Building a microservice using Python, Django and docker
+## Tutorial 2 
 TBD
 ## Tutorial 3
 TBD
